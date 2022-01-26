@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>{{ config('app.name', 'North Travel Agency') }}</title>
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+    <!-- {{-- bootstrap links --}} -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+  
+</head>
+<body class="bg-dark scroll4">
+
+        <nav class="navbar navbar-expand-md bg-dark navbar-dark sticky-top shadow bg-dark rounded" >
+            <div class="container-fluid">
+                <img style="width: 70px;" class="rounded-pill" src="{{asset('storage/Black & White Holiday Travel Explore Logo.png') }}" alt="logocompany">
+                <span class="navbar-brand">NORTH TRAVEL AGENCY</span> <!--navbar-text later if you want to change-->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">  
+                <ul class="navbar-nav  ms-auto mb-2 "> <!-- nav-pills also works-->
+                  <li class="nav-item">
+                      <a class="nav-link active" href="#iframedyalna" id="home" >home </a>
+                    </li>
+                  <li class="nav-item">
+                      <a class="nav-link "  href="#iframedyalna"  id="vols"> vols</a></li>
+                  <li class="nav-item  dropdown"><a class="nav-link dropdown-toggle" data-bs-hover="dropdown" href="#iframedyalna" id="hotels" > Hotels monde</a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      <li><a class="dropdown-item" href=""> EN Afrique</a></li>
+                      <li><a class="dropdown-item" href=""> EN ASIE</a></li>
+                      <li><a class="dropdown-item" href=""> EN EUROPE</a></li>
+                      <li><a class="dropdown-item" href=""> EN AMERIQUE</a></li>
+                      <li><a class="dropdown-item" href=""> EN OCEANIE</a></li>
+                  
+                  </ul>
+                  </li>
+                  <li class="nav-item "><a class="nav-link" href="#iframedyalna" id="voyage">Voyage organise</a></li>
+                  <li class="nav-item  " ><a class="nav-link " href="#iframedyalna" id="hajj">Hajj & omra</a></li>
+                  <li>
+                  <ul class="navbar-nav ms-auto">
+                    <!-- Authentication Links, wont work unless blade, dont worry about it-->
+                    @guest
+                        @if (Route::has('login'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
+                        @endif
+
+                        @if (Route::has('register'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            </li>
+                        @endif
+                    @else
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ Auth::user()->name }}
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
+                    @endguest
+                </ul>
+            </li>
+                
+                  
+              </ul>
+            </div>    
+          </div> 
+        </nav>
+           <div class="row search d flex" >
+    <div class="col-6 travel">
+      <div class="col-10">
+        <h1 class="travel__heading">Search your next <span
+                class="text-under-line text-under-line--pink">Holiday</span>
+        </h1>
+        <h6 class="travel__sub-heading">CHECK OUR BEST PROMOTIONS</h6>
+
+        <div class="travel__select">
+            <form class="travel__form">
+                <select class="travel__select-input">
+                    <option value="0" class="travel__option">Choose your Destination ...</option>
+                    <option value="1" class="travel__option">Europe</option>
+                    <option value="2" class="travel__option">&nbsp;&nbsp; - Italy</option>
+                    <option value="3" class="travel__option">&nbsp;&nbsp; - Netherlands</option>
+                    <option value="4" class="travel__option">Asia</option>
+                    <option value="5" class="travel__option">&nbsp;&nbsp; - Thailandia</option>
+                    <option value="6" class="travel__option">United States</option>
+                    <option value="7" class="travel__option">Oceania</option>
+                </select>
+                <button class="travel__btn-submit">
+                    <i class="travel__btn-icon ri-search-line"></i>
+                </button>
+            </form>
+        </div>
+
+        <div class="travel__section row">
+            <div class="col l-3 m-12  c-12">
+                <div class="travel__card ">
+                    <img src="{{ asset('storage/relax__icon.png') }}" class="travel__card-img">
+                    <p class="travel__card-desc">RELAX</p>
+                </div>
+            </div>
+            <div class="col l-3 m-12 c-12">
+                <div class="travel__card">
+                    <img src="{{ asset('storage/cultural__icon.png' ) }}" alt="" class="travel__card-img">
+                    <p class="travel__card-desc">Cultural</p>
+                </div>
+            </div>
+            <div class="col l-3 m-12 c-12">
+                <div class="travel__card">
+                    <img src="{{ asset('storage/sport__icon.png' ) }}"  alt="" class="travel__card-img">
+                    <p class="travel__card-desc">Sport</p>
+                </div>
+            </div>
+            <div class="col l-3 m-12 c-12">
+                <div class="travel__card">
+                    <img src="{{ asset('storage/history__icon.png' ) }}"  alt="" class="travel__card-img">
+                    <p class="travel__card-desc">history</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+   
+</div>
+<div class="col-4 ">
+
+    <div class="images">
+        <div
+          class="image wide"
+          style="background-image: url('storage/pexels-alexandr-podvalny-3278215.jpg');"
+          
+        ></div>
+
+        <div
+          class="image"
+          style="background-image: url('storage/pexels-c-cagnin-2007401.jpg');"
+        ></div>
+
+        <div
+          class="image tall"
+          style="
+            background-image: url('storage/pexels-ian-beckley-2440079.jpg');"
+        ></div>
+
+        <div
+          class="image"
+          style="
+            background-image: url('storage/pexels-johannes-plenio-1119972.jpg');"
+        ></div>
+
+        <div
+          class="image"
+          style="background-image: url('storage/pexels-mark-neal-2225439.jpg');"
+        ></div>
+        <div
+          class="image wide"
+          style="
+            background-image: url('storage/pexels-mali-maeder-1483024.jpg');"
+        ></div>
+      </div>
+    </div>
+    <div id="app" >
+        <!-- hotels liste -->
+
+
+        <div class="album py-5 bg-light bg-dark">
+            <div class="container">
+        
+              <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                <div class="col">
+                  <div class="card shadow-sm">
+                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+        
+                    <div class="card-body">
+                      <p class="card-text bg-primary">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                          <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                        </div>
+                        <small class="text-muted">9 mins</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card shadow-sm">
+                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+        
+                    <div class="card-body">
+                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                          <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                        </div>
+                        <small class="text-muted">9 mins</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card shadow-sm">
+                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+        
+                    <div class="card-body">
+                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                          <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                        </div>
+                        <small class="text-muted">9 mins</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+        
+                <div class="col">
+                  <div class="card shadow-sm">
+                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+        
+                    <div class="card-body">
+                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                          <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                        </div>
+                        <small class="text-muted">9 mins</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card shadow-sm">
+                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+        
+                    <div class="card-body">
+                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                          <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                        </div>
+                        <small class="text-muted">9 mins</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card shadow-sm">
+                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+        
+                    <div class="card-body">
+                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                          <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                        </div>
+                        <small class="text-muted">9 mins</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+        
+                <div class="col">
+                  <div class="card shadow-sm">
+                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+        
+                    <div class="card-body">
+                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                          <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                        </div>
+                        <small class="text-muted">9 mins</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card shadow-sm">
+                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+        
+                    <div class="card-body">
+                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                          <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                        </div>
+                        <small class="text-muted">9 mins</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card shadow-sm">
+                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+        
+                    <div class="card-body">
+                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                          <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                        </div>
+                        <small class="text-muted">9 mins</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+     
+    </div> 
+    
+    
+    {{-- footer --}}
+
+
+    <div class="container text-white">
+        <hr class="featurette-divider">
+        <footer class="py-5">
+          <div class="row">
+            <div class=" col-sm-3 col-md-3">
+              <h5>Experiences</h5>
+              <ul class="nav flex-column">
+                <li class="nav-item mb-2"> ranked number one in africa of  property agency in 2014  </li>
+                <li class="nav-item mb-2">  the famous agency in the africa </li>
+                <li class="nav-item mb-2">best agency award from services in 2020</li>
+                <li class="nav-item mb-2"> at your service 24h/24h </li>
+                <li class="nav-item mb-2"> customer service is a goal , not a duty </li>
+              </ul>
+            </div>
+      
+            <div class="col-sm-3 col-md-2">
+              <h5>What's more</h5>
+              <ul class="nav flex-column">
+                <li class="nav-item mb-2"><a href="#iframedyalna" class="nav-link p-0 text-muted">Home</a></li>
+                <li class="nav-item mb-2"><a href="./about_us.html" target="_self"  class="nav-link p-0 text-muted">About</a></li>
+                <li class="nav-item mb-2"> Private</li>
+                <li class="nav-item mb-2">Sevices&activites</li>
+                <li class="nav-item mb-2">FAQs</li>
+               
+              </ul>
+            </div>
+      
+            <div class="col-sm-3 col-md-2">
+              <h5>Our partners </h5>
+              <ul class="nav flex-column">
+                <li class="nav-item mb-2"><a href="https://www.groupebcp.com/fr/Pages/home.aspx" target="_blank" class="nav-link p-0 text-muted">Bank of Afrique</a></li>
+                <li class="nav-item mb-2"><a href="http://www.mcdonalds.ma"  target="_blank"  class="nav-link p-0 text-muted">Mcdonald's</a>  </li>
+                <li class="nav-item mb-2"><a href="http://www.inwi.ma"  target="_blank"  class="nav-link p-0 text-muted"> Inwi</a></li>
+              </ul>
+            </div>
+      
+            <div class="d-none d-md-block col-md-4 offset-1">
+              <form>
+                <h5>Subscribe to our newsletter</h5>
+                <p>Monthly digest of whats new and exciting from us.</p>
+                <div class="d-flex w-100 gap-2">
+                  <label for="newsletter1" class="visually-hidden">Email address</label>
+                  <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
+                  <button class="btn btn-primary" type="button">Subscribe</button>
+                </div>
+              </form>
+            </div>
+          </div>
+      
+          <div class="d-flex justify-content-between py-4 my-4 border-top">
+            <p>&copy; 2021 Company, Inc. All rights reserved.</p>
+            <ul class="list-unstyled d-flex">
+              <li class="ms-3"><a class="link-dark" target="_blank" href="https://twitter.com/"><img class="bi" width="24" height="24" src="https://img.icons8.com/color/48/000000/twitter.png"/></a></li>
+              <li class="ms-3"><a class="link-dark" target="_blank" href="https://www.instagram.com/?hl=fr"><img class="bi" width="24" height="24" src="https://img.icons8.com/fluency/48/000000/instagram-new.png"/></a></li>
+              <li class="ms-3"><a class="link-dark" target="_blank" href="https://fr-fr.facebook.com/"><img class="bi" width="24" height="24"  src="https://img.icons8.com/color/48/000000/facebook.png"/></a></li>
+            </ul>
+          </div>
+        </footer>
+      </div>
+      
+
+</body>
+</html>
